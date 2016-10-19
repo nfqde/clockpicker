@@ -638,12 +638,13 @@
 		this[this.currentView] = value;
 		this[isHours ? 'spanHours' : 'spanMinutes'].html(leadingZero(value));
 
+		this[isHours ? 'hoursView' : 'minutesView'].find('.clockpicker-tick').each(function(){
+			var tick = $(this);
+			tick.toggleClass('active', value === + tick.html());
+		});
+
 		// If svg is not supported, just add an active class to the tick
 		if (! svgSupported) {
-			this[isHours ? 'hoursView' : 'minutesView'].find('.clockpicker-tick').each(function(){
-				var tick = $(this);
-				tick.toggleClass('active', value === + tick.html());
-			});
 			return;
 		}
 
